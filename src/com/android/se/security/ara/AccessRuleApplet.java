@@ -121,7 +121,9 @@ public class AccessRuleApplet {
             }
             return stream.toByteArray();
             // referenced data not found
-        } else if (response.isStatus(0x6A88)) {
+            // UNISOC Add Status Word 0x6A82 Support
+            // To pass SGS lab GCF 5.4 cases, details see Bug1072945
+        } else if (response.isStatus(0x6A88) || response.isStatus(0x6A82)) {
             return null;
         } else {
             throw new AccessControlException("GET DATA (all) not successfull. SW1SW2="
